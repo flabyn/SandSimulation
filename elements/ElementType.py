@@ -8,7 +8,6 @@ class ElementType(Enum):
     EMPTYCELL = 0
     SAND = 1
 
-    @property
     def MatrixCreateElement(self,x:int=1,y:int=1) -> Element:
         match self:
             case ElementType.EMPTYCELL:

@@ -9,13 +9,12 @@ class CellMatrix:
         self.Matrix = self.generateMatrix()
 
 
-    def generateMatrix(self) -> list:
+    def generateMatrix(self) -> list: #done in a odd way
         matrix = [['' for _ in range(self.Matrixsize[0])] for _ in range(self.Matrixsize[1])] 
 
         for y in range(self.Matrixsize[1]):
             for x in range(self.Matrixsize[0]):
-                print(ElementType.EMPTYCELL.MatrixCreateElement) #returns class but wont take x,y
-                #matrix[y][x] = ElementType.EMPTYCELL.MatrixCreateElement(x,y)
+                matrix[y][x] = ElementType.EMPTYCELL.MatrixCreateElement(x,y)
 
         return matrix
     
