@@ -4,6 +4,7 @@ from elements.ElementType import ElementType
 
 class CellMatrix:
     def __init__(self,cellsize:int,screen,screen_size:list[int]) -> None:
+        self.screen = screen
         self.CellSize = cellsize
         self.Matrixsize = [screen_size[0]//cellsize,screen_size[1]//cellsize]
         self.Matrix = self.generateMatrix()
@@ -18,5 +19,18 @@ class CellMatrix:
 
         return matrix
     
+    @property
     def GetMatrix(self) -> list:
         return self.Matrix
+    
+    def GetElementAtIndex(self,x:int,y:int):
+        return self.Matrix[y][x]
+    
+    def DrawAll(self):
+        for y in self.Matrix:
+            for x in y:
+                element = x
+                position = element.position
+                print(position[0])
+                py.draw.rect(self.screen,element.colour,(position[0]*self.CellSize,position[1]*self.CellSize,self.CellSize,self.CellSize))
+                #py.draw.rect(self.screen,element.colour,(position[0]*self.CellSize,10,10,10))

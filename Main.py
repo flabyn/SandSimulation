@@ -1,6 +1,7 @@
 import pygame as py
 from matrix.CellMatrix import CellMatrix
 from elements.Element import Element
+from elements.EmptyCell import EmptyCell
 
 import time
 
@@ -14,16 +15,19 @@ screen=py.display.set_mode([WIDTH, HEIGHT])
 
 def main_loop():
     matrix = CellMatrix(50,screen=screen,screen_size=[WIDTH,HEIGHT])
-    matrix.Matrix[1][0] = 1
     while True:
 
-        print(matrix.GetMatrix())
+        #print(matrix.Matrix)
+        element = matrix.GetElementAtIndex(x=2,y=3)
 
+        print(element)
+        print(element.position)
+        print(element.colour)
+        print(isinstance(element,EmptyCell))
 
-
-
-        time.sleep(2)
-        py.display.flip()
+        matrix.DrawAll()
+        py.display.flip() 
+        time.sleep(200)
 
 if __name__ == "__main__":
     main_loop()
