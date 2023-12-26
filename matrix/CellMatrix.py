@@ -1,4 +1,6 @@
 import pygame as py
+from elements.Element import Element
+from elements.ElementType import ElementType
 
 class CellMatrix:
     def __init__(self,cellsize:int,screen,screen_size:list[int]) -> None:
@@ -8,7 +10,13 @@ class CellMatrix:
 
 
     def generateMatrix(self) -> list:
-        matrix = [[0 for _ in range(self.Matrixsize[0])] for _ in range(self.Matrixsize[1])] 
+        matrix = [['' for _ in range(self.Matrixsize[0])] for _ in range(self.Matrixsize[1])] 
+
+        for y in range(self.Matrixsize[1]):
+            for x in range(self.Matrixsize[0]):
+                print(ElementType.EMPTYCELL.MatrixCreateElement) #returns class but wont take x,y
+                #matrix[y][x] = ElementType.EMPTYCELL.MatrixCreateElement(x,y)
+
         return matrix
     
     def GetMatrix(self) -> list:

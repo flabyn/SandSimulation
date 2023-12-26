@@ -1,5 +1,6 @@
 import pygame as py
 from matrix.CellMatrix import CellMatrix
+from elements.Element import Element
 
 import time
 
@@ -17,6 +18,7 @@ def main_loop():
     while True:
 
         print(matrix.GetMatrix())
+
 
 
 
