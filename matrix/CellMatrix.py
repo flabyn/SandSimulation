@@ -1,6 +1,7 @@
 import pygame as py
 from elements.Element import Element
 from elements.ElementType import ElementType
+from elements.EmptyCell import EmptyCell
 
 class CellMatrix:
     def __init__(self,cellsize:int,screen,screen_size:list[int]) -> None:
@@ -30,6 +31,8 @@ class CellMatrix:
         for y in self.Matrix:
             for x in y:
                 element = x
+                if isinstance(element,EmptyCell):
+                    continue
                 position = element.position
                 print(position[0])
                 py.draw.rect(self.screen,element.colour,(position[0]*self.CellSize,position[1]*self.CellSize,self.CellSize,self.CellSize))
