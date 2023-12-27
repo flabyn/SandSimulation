@@ -8,8 +8,8 @@ import time
 
 WIDTH = 500
 HEIGHT = 500
-CELLSIZE = 10
-FPS = 10
+CELLSIZE = 5
+FPS = 100
 
 
 user_holding_mouse = False
@@ -53,9 +53,12 @@ def main_loop():
         #print(isinstance(element,EmptyCell))
 
         matrix.DrawAndStepAll()
-        py.display.flip() 
         end = time.time()
         total_time = end-start
+        font = py.font.Font(None, 24)
+        text = font.render(f"Fps:{round(1/max(total_time,1/FPS))}", True, (100, 100, 100))
+        screen.blit(text, (10,10))
+        py.display.flip() 
         time.sleep(max(0,(1/FPS)-total_time))
 
 if __name__ == "__main__":
