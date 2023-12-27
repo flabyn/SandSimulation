@@ -1,4 +1,5 @@
 import pygame as py
+import random
 from elements.Element import Element
 from elements.ElementType import ElementType
 from elements.EmptyCell import EmptyCell
@@ -20,16 +21,6 @@ class CellMatrix:
 
         return matrix
     
-    @property
-    def GetMatrix(self) -> list:
-        return self.Matrix
-    
-    def GetElementAtIndex(self,x:int,y:int):
-        return self.Matrix[y][x]
-    
-    def SetElementAtIndex(self,x:int,y:int,element:Element):
-        self.Matrix[y][x] = element
-
     def DrawAll(self):
         for y in self.Matrix:
             for x in y:
@@ -38,8 +29,39 @@ class CellMatrix:
                     continue
                 position = element.position
                 py.draw.rect(self.screen,element.colour,(position[0]*self.CellSize,position[1]*self.CellSize,self.CellSize,self.CellSize))
-                #py.draw.rect(self.screen,element.colour,(position[0]*self.CellSize,10,10,10))
     
-    def RemoveAndSpawnElement(self,x:int,y:int):
+    def StepAll(self):
+        for y in reversed(self.Matrix):
+            row = y
+            #random.shuffle(row) #shuffles each row
+            for x in y:
+                x.step(self)
+    
+    def DrawAndStepAll(self):
+        self.StepAll()
+        self.DrawAll()
+    
+
+    @property
+    def GetMatrix(self) -> list:
+        return self.Matrix
+    
+    def GetElementAtIndex(self,x:int,y:int) -> Element:
+        return self.Matrix[y][x]
+    
+    def SetElementAtIndex(self,x:int,y:int,element:Element) -> None:
+        self.Matrix[y][x] = element
+    
+    def RemoveAndSpawnElement(self,x:int,y:int) -> None:
         element = ElementType.SAND.MatrixCreateElement(x,y)
         self.SetElementAtIndex(x,y,element)
+
+    def SwapElementsAtIndex(self, pos1,pos2):
+        element1 = self.GetElementAtIndex(pos1[0],pos1[1])
+        element2 = self.GetElementAtIndex(pos2[0],pos2[1])
+
+        element1.position = [pos2[0],pos2[1]]
+        element2.position = [pos1[0],pos1[1]]
+
+        self.SetElementAtIndex(pos1[0],pos1[1],element2)
+        self.SetElementAtIndex(pos2[0],pos2[1],element1)

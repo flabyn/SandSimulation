@@ -2,7 +2,7 @@ from enum import Enum
 
 from elements.Element import Element
 from elements.EmptyCell import EmptyCell
-from elements.Sand import Sand
+from elements.Solid.moveableSolid.Sand import Sand
 
 class ElementType(Enum):
     EMPTYCELL = 0
@@ -15,4 +15,4 @@ class ElementType(Enum):
                 return cell
             case ElementType.SAND:
                 cell = Sand(x,y)
-                return cell
+                return cell 

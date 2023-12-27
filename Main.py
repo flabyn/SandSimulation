@@ -8,7 +8,9 @@ import time
 
 WIDTH = 500
 HEIGHT = 500
-CELLSIZE = 50
+CELLSIZE = 10
+FPS = 10
+
 
 user_holding_mouse = False
 
@@ -29,29 +31,32 @@ def EventHandler():
 
 def Spawner(matrix:CellMatrix):
     if user_holding_mouse:
-        print("here")
         position = py.mouse.get_pos()
         cellpos = (position[0]//CELLSIZE,position[1]//CELLSIZE)
-        print(cellpos)
         matrix.RemoveAndSpawnElement(cellpos[0],cellpos[1])
 
 def main_loop():
     matrix = CellMatrix(CELLSIZE,screen=screen,screen_size=[WIDTH,HEIGHT])
     while True:
+        start = time.time()
+        screen.fill((0,0,0))
+
         EventHandler()
         Spawner(matrix)
 
         #print(matrix.Matrix)
-        element = matrix.GetElementAtIndex(x=2,y=3)
+        #element = matrix.GetElementAtIndex(x=2,y=3)
 
-        print(element)
+        #print(element)
         #print(element.position)
         #print(element.colour)
         #print(isinstance(element,EmptyCell))
 
-        matrix.DrawAll()
+        matrix.DrawAndStepAll()
         py.display.flip() 
-        time.sleep(0.3)
+        end = time.time()
+        total_time = end-start
+        time.sleep(max(0,(1/FPS)-total_time))
 
 if __name__ == "__main__":
     main_loop()
