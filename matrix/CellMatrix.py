@@ -27,6 +27,9 @@ class CellMatrix:
     def GetElementAtIndex(self,x:int,y:int):
         return self.Matrix[y][x]
     
+    def SetElementAtIndex(self,x:int,y:int,element:Element):
+        self.Matrix[y][x] = element
+
     def DrawAll(self):
         for y in self.Matrix:
             for x in y:
@@ -34,6 +37,9 @@ class CellMatrix:
                 if isinstance(element,EmptyCell):
                     continue
                 position = element.position
-                print(position[0])
                 py.draw.rect(self.screen,element.colour,(position[0]*self.CellSize,position[1]*self.CellSize,self.CellSize,self.CellSize))
                 #py.draw.rect(self.screen,element.colour,(position[0]*self.CellSize,10,10,10))
+    
+    def RemoveAndSpawnElement(self,x:int,y:int):
+        element = ElementType.SAND.MatrixCreateElement(x,y)
+        self.SetElementAtIndex(x,y,element)
