@@ -32,9 +32,9 @@ class CellMatrix:
     
     def StepAll(self):
         for y in reversed(self.Matrix):
-            row = y
-            #random.shuffle(row) #shuffles each row
-            for x in y:
+            row = y.copy()
+            random.shuffle(row) #shuffles each row
+            for x in row:
                 x.step(self)
     
     def DrawAndStepAll(self):
@@ -52,8 +52,8 @@ class CellMatrix:
     def SetElementAtIndex(self,x:int,y:int,element:Element) -> None:
         self.Matrix[y][x] = element
     
-    def RemoveAndSpawnElement(self,x:int,y:int) -> None:
-        element = ElementType.SAND.MatrixCreateElement(x,y)
+    def RemoveAndSpawnElement(self,x:int,y:int,element_type:ElementType) -> None:
+        element = element_type.MatrixCreateElement(x,y)
         self.SetElementAtIndex(x,y,element)
 
     def SwapElementsAtIndex(self, pos1,pos2):

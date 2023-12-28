@@ -1,7 +1,7 @@
 import random
-from elements.Element import Element
+from elements.Solid.Solid import Solid
 from elements.EmptyCell import EmptyCell
-class MoveableSolid(Element):
+class MoveableSolid(Solid):
     def __init__(self, x: int, y: int) -> None:
         super().__init__(x, y)
     
