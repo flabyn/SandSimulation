@@ -65,6 +65,8 @@ def EventHandler(spawner:Spawner):
                 spawner.element = max(0,spawner.element-1)
             if event.key == 61:#+
                 spawner.element += 1
+            if event.key >= 48 and event.key <= 57:
+                spawner.element = int(event.unicode)
             
 
 def HUD(total_time:float,spawner:Spawner):
@@ -82,7 +84,7 @@ def main_loop():
     global frame_step
     spawner = Spawner()
     matrix = CellMatrix(CELLSIZE,screen=screen,screen_size=[WIDTH,HEIGHT])
-    
+
     def main_loop_logic():
             matrix.DrawAndStepAll()
 
