@@ -3,6 +3,8 @@ class Element:
         self.position = [x,y]
         self.colour = (100,100,100)
         self.velocity = (0,0)
+
+        self.viscosity = 1.0
     
     def step(self,matrix):
         pass

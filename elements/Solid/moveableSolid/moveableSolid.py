@@ -1,6 +1,7 @@
 import random
 from elements.Solid.Solid import Solid
 from elements.EmptyCell import EmptyCell
+from elements.Liquid.Liquid import Liquid
 class MoveableSolid(Solid):
     def __init__(self, x: int, y: int) -> None:
         super().__init__(x, y)
@@ -9,7 +10,8 @@ class MoveableSolid(Solid):
         if self.position[1] == matrix.Matrixsize[1]-1:
             return
         #1 fall if air below
-        if isinstance(matrix.GetElementAtIndex(self.position[0],self.position[1]+1),EmptyCell):
+
+        if not isinstance(matrix.GetElementAtIndex(self.position[0],self.position[1]+1),Solid):
             matrix.SwapElementsAtIndex(self.position,(self.position[0],self.position[1]+1))
             return
         #2 check diagonals

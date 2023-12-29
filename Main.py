@@ -10,7 +10,7 @@ import time
 WIDTH = 500
 HEIGHT = 500
 CELLSIZE = 5
-FPS = 100
+FPS = 60
 
 game_paused = False
 frame_step = False

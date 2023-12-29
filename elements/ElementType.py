@@ -5,12 +5,14 @@ from elements.EmptyCell import EmptyCell
 from elements.Solid.moveableSolid.Sand import Sand
 from elements.Solid.ImmovableSolid.Stone import Stone
 from elements.Liquid.Water import Water
+from elements.Gas.Steam import Steam
 
 class ElementType(Enum):
     EMPTYCELL = 0
     SAND = 1
     STONE = 2
     WATER = 3
+    STEAM = 4
 
     def MatrixCreateElement(self,x:int=1,y:int=1) -> Element:
         match self:
@@ -26,3 +28,7 @@ class ElementType(Enum):
             case ElementType.WATER:
                 cell = Water(x,y)
                 return cell
+            case ElementType.STEAM:
+                cell = Steam(x,y)
+                return cell
+            
