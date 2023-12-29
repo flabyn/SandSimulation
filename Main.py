@@ -69,12 +69,18 @@ def EventHandler(spawner:Spawner):
                 spawner.element = int(event.unicode)
             
 
-def HUD(total_time:float,spawner:Spawner):
-    font = py.font.Font(None, 24)
+def HUD(total_time:float,spawner:Spawner,matrix:CellMatrix):
+    font = py.font.Font(None, 16)
     text = font.render(f"Fps:{round(1/max(total_time,1/FPS))}", True, (100, 100, 100))
     screen.blit(text, (10,10))
 
     text = font.render(f"Element: {ElementType(spawner.element).name}", True, (100, 100, 100))
+    screen.blit(text, (10,20))
+
+    position = py.mouse.get_pos()
+    element = matrix.GetElementAtIndex(position[0]//CELLSIZE,position[1]//CELLSIZE)
+
+    text = font.render(f"Temp: {element.temp}", True, (100, 100, 100))
     screen.blit(text, (10,30))
 
     py.display.flip() 
@@ -105,7 +111,7 @@ def main_loop():
         end = time.time()
         total_time = end-start
 
-        HUD(total_time,spawner)
+        HUD(total_time,spawner,matrix)
         time.sleep(max(0,(1/FPS)-total_time))
         
 

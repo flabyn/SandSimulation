@@ -1,5 +1,6 @@
 from elements.Element import Element
 from elements.EmptyCell import EmptyCell
+from elements.ElementTypeShh import ElementType #i dont like this
 import random
 
 class Liquid(Element):
@@ -7,8 +8,12 @@ class Liquid(Element):
         super().__init__(x, y)
     
     def step(self,matrix):
+        if self.temp >= 100:
+            matrix.DieAndReplace(self.position,ElementType.STEAM)
+
         if self.position[1] == matrix.Matrixsize[1]-1:
             return
+
         #1 fall if air below
         if isinstance(matrix.GetElementAtIndex(self.position[0],self.position[1]+1),EmptyCell):
             matrix.SwapElementsAtIndex(self.position,(self.position[0],self.position[1]+1))

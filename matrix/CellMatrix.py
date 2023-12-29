@@ -36,6 +36,8 @@ class CellMatrix:
             random.shuffle(row) #shuffles each row
             for x in row:
                 x.step(self)
+                if random.random() < 0.3: #30% change
+                    x.TransferTemp(self)
     
     def DrawAndStepAll(self):
         self.StepAll()
@@ -65,3 +67,7 @@ class CellMatrix:
 
         self.SetElementAtIndex(pos1[0],pos1[1],element2)
         self.SetElementAtIndex(pos2[0],pos2[1],element1)
+
+    def DieAndReplace(self,pos,new_element):
+        element = ElementType(new_element.value).MatrixCreateElement(pos[0],pos[1])
+        self.SetElementAtIndex(pos[0],pos[1],element)
