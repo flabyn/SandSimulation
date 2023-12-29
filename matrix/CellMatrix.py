@@ -36,8 +36,8 @@ class CellMatrix:
             random.shuffle(row) #shuffles each row
             for x in row:
                 x.step(self)
-                if random.random() < 0.3: #30% change
-                    x.TransferTemp(self)
+                #if random.random() < 0.3: #30% change
+                    #x.TransferTemp(self)
     
     def DrawAndStepAll(self):
         self.StepAll()

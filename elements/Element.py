@@ -1,3 +1,4 @@
+import random
 class Element:
     def __init__(self,x:int,y:int) -> None:
         self.position = [x,y]
@@ -32,3 +33,9 @@ class Element:
         e4.temp = avg_temp
         self.temp = avg_temp
 
+    def RandomColour(self,colour):
+        rand = (random.random()-0.5)*30
+        R = min(max(colour[0] + (rand),0),255)
+        G = min(max(colour[1] + (rand),0),255)
+        B = min(max(colour[2] + (rand),0),255)
+        return (R,G,B)
