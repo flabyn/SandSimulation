@@ -80,7 +80,7 @@ def HUD(total_time:float,spawner:Spawner,matrix:CellMatrix):
     position = py.mouse.get_pos()
     element = matrix.GetElementAtIndex(position[0]//CELLSIZE,position[1]//CELLSIZE)
 
-    text = font.render(f"Temp: {element.temp}", True, (100, 100, 100))
+    text = font.render(f"vel: {element.temp}", True, (100, 100, 100))
     screen.blit(text, (10,30))
 
     py.display.flip() 

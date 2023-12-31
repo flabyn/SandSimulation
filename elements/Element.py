@@ -4,7 +4,9 @@ class Element:
         self.position = [x,y]
         self.colour = (100,100,100)
         self.velocity = (0,0)
-        self.terminal_velocity = 8
+        self.terminal_velocity = 10
+        self.friction = 0.1
+        self.friction_count = 0
         self.temp = 1
 
         self.viscosity = 1.0
@@ -19,25 +21,39 @@ class Element:
             dir = 0
             if self.velocity[0] > 0: dir = 1
             else: dir = -1
-            matrix.SwapElementsAtIndex(self.position,(self.position[0]+self.checkDownVelocityPositions(matrix,stopingElement,dir),self.position[1]))
+            matrix.SwapElementsAtIndex(self.position,(self.position[0]+self.checkSideVelocityPositions(matrix,stopingElement,dir),self.position[1]))
+
+    def handleVertVelocity(self, matrix, stopingElement):
+        matrix.SwapElementsAtIndex(self.position,(self.position[0],self.position[1]+self.checkDownVelocityPositions(matrix,stopingElement)))
+
+    def handleHorzVelocity(self, matrix, stopingElement):
+        if abs(self.velocity[0]) > 0:
+            dir = 0
+            if self.velocity[0] > 0: dir = 1
+            else: dir = -1
+            matrix.SwapElementsAtIndex(self.position,(self.position[0]+self.checkSideVelocityPositions(matrix,stopingElement,dir),self.position[1]))
+
 
     def checkDownVelocityPositions(self,matrix,stopingElement):
         for i in range(1,self.velocity[1]+1):
             if i + self.position[1] >= matrix.Matrixsize[1]:
-                self.velocity = (0,0)
+                self.velocity = ((self.velocity[1]//4)*random.randint(-1,1),0)
                 return i-1
             if isinstance(matrix.GetElementAtIndex(self.position[0],self.position[1]+i),stopingElement):
-                self.velocity = (0,0)
+                dir = -1 if random.random() > 0.5 else 1
+                self.velocity = (self.velocity[0]+((self.velocity[1]//4)*dir),0)
                 return i-1
         return self.velocity[1]
 
     def checkSideVelocityPositions(self,matrix,stopingElement,direction:int):
-        for i in range((1*direction),self.velocity[0],1*direction):
-            if isinstance(matrix.GetElementAtIndex(self.position[0],self.position[1]+i),stopingElement):
+        if isinstance(matrix.GetElementAtIndex(self.position[0]+(1*direction),self.position[1]),stopingElement):
+            self.friction_count += 1
+            if self.friction_count >= 16:
                 self.velocity = (0,0)
-                return i-(1*direction)
-        return self.velocity[1]-(1*direction)
-
+            return 0
+        if random.random() < self.friction:
+            self.velocity = (self.velocity[0]-(1*direction),self.velocity[1])
+        return 1*direction
 
     def TransferTemp(self,matrix):
         if self.position[1] == 0 or self.position[1] >= matrix.Matrixsize[1]-1:
