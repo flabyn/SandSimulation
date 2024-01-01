@@ -8,6 +8,9 @@ class Element:
         self.friction = 0.001
         self.friction_count = 0
         self.temp = 1
+        self.isfreefalling = True
+        self.movedthisframe = False
+        self.movedlastframe = True
 
         self.viscosity = 1.0
     def step(self,matrix):
@@ -56,7 +59,7 @@ class Element:
                 self.velocity = (self.velocity[0]*-1,self.velocity[1])
             #wait untill open space
             self.friction_count += 1
-            if self.friction_count >= 32:
+            if self.friction_count >= 100:
                 self.velocity = (0,0)
             return 0
         
