@@ -48,7 +48,7 @@ class Element:
     def checkSideVelocityPositions(self,matrix,stopingElement,direction:int):
         if isinstance(matrix.GetElementAtIndex(self.position[0]+(1*direction),self.position[1]),stopingElement):
             self.friction_count += 1
-            if self.friction_count >= 16:
+            if self.friction_count >= 32:
                 self.velocity = (0,0)
             return 0
         if random.random() < self.friction:
