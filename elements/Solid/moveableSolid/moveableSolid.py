@@ -25,6 +25,7 @@ class MoveableSolid(Solid):
                 valid_positions.append((self.position[0]-1,self.position[1]+1))
         if len(valid_positions)>0:
             matrix.SwapElementsAtIndex(self.position,random.choice(valid_positions))
+            
         elif abs(self.velocity[0]) > 0:
             self.handleHorzVelocity(matrix,Solid)
 

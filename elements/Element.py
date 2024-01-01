@@ -5,7 +5,7 @@ class Element:
         self.colour = (100,100,100)
         self.velocity = (0,0)
         self.terminal_velocity = 10
-        self.friction = 0.1
+        self.friction = 0.001
         self.friction_count = 0
         self.temp = 1
 
@@ -46,11 +46,20 @@ class Element:
         return self.velocity[1]
 
     def checkSideVelocityPositions(self,matrix,stopingElement,direction:int):
+        if self.position[0]+(1*direction) <= 0 or self.position[0]+(1*direction) >= matrix.Matrixsize[0]:
+            self.velocity = (0,0)
+            return 0
         if isinstance(matrix.GetElementAtIndex(self.position[0]+(1*direction),self.position[1]),stopingElement):
+            ele=matrix.GetElementAtIndex(self.position[0]+(1*direction),self.position[1])
+            if abs(ele.velocity[0]) + abs(self.velocity[0]) != abs(ele.velocity[0] + self.velocity[0]):
+                ele.velocity = (ele.velocity[0]*-1,ele.velocity[1])
+                self.velocity = (self.velocity[0]*-1,self.velocity[1])
+            #wait untill open space
             self.friction_count += 1
             if self.friction_count >= 32:
                 self.velocity = (0,0)
             return 0
+        
         if random.random() < self.friction:
             self.velocity = (self.velocity[0]-(1*direction),self.velocity[1])
         return 1*direction

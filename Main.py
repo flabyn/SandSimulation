@@ -42,7 +42,6 @@ class Spawner:
                     cellpos = (x_pos,y_pos)
                     matrix.RemoveAndSpawnElement(cellpos[0],cellpos[1],element)
 
-
 def EventHandler(spawner:Spawner):
     for event in py.event.get():
         if event.type == QUIT:
@@ -68,7 +67,6 @@ def EventHandler(spawner:Spawner):
             if event.key >= 48 and event.key <= 57:
                 spawner.element = int(event.unicode)
             
-
 def HUD(total_time:float,spawner:Spawner,matrix:CellMatrix):
     font = py.font.Font(None, 16)
     text = font.render(f"Fps:{round(1/max(total_time,1/FPS))}", True, (100, 100, 100))
@@ -114,8 +112,6 @@ def main_loop():
         HUD(total_time,spawner,matrix)
         time.sleep(max(0,(1/FPS)-total_time))
         
-
-
 
 if __name__ == "__main__":
     main_loop()
