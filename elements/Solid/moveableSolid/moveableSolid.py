@@ -59,10 +59,12 @@ class MoveableSolid(Solid):
         if self.position[0]-1 <= 0 or self.position[0]+1 >= matrix.Matrixsize[0]:
             return
         if isinstance(ele:=matrix.GetElementAtIndex(self.position[0]+1,self.position[1]),MoveableSolid):
-            ele.isfreefalling = True
-            ele.movedlastframe = True
-            ele.movedthisframe = True
+            if random.random() > ele.friction:
+                ele.isfreefalling = True
+                ele.movedlastframe = True
+                ele.movedthisframe = True
         if isinstance(ele:=matrix.GetElementAtIndex(self.position[0]-1,self.position[1]),MoveableSolid):
-            ele.isfreefalling = True
-            ele.movedlastframe = True
-            ele.movedthisframe = True
+            if random.random() > ele.friction:
+                ele.isfreefalling = True
+                ele.movedlastframe = True
+                ele.movedthisframe = True

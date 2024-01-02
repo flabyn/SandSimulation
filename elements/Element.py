@@ -26,6 +26,16 @@ class Element:
             else: dir = -1
             matrix.SwapElementsAtIndex(self.position,(self.position[0]+self.checkSideVelocityPositions(matrix,stopingElement,dir),self.position[1]))
 
+    def handleVelocityMultiStops(self, matrix, stopingElement1, stopingElement2):
+        if self.velocity[1] > 0:
+            num = min(self.checkDownVelocityPositions(matrix,stopingElement1),self.checkDownVelocityPositions(matrix,stopingElement2))
+            matrix.SwapElementsAtIndex(self.position,(self.position[0],self.position[1]+num))
+        elif abs(self.velocity[0]) > 0:
+            dir = 0
+            if self.velocity[0] > 0: dir = 1
+            else: dir = -1
+            matrix.SwapElementsAtIndex(self.position,(self.position[0]+self.checkSideVelocityPositions(matrix,stopingElement1,dir),self.position[1]))
+
     def handleVertVelocity(self, matrix, stopingElement):
         matrix.SwapElementsAtIndex(self.position,(self.position[0],self.position[1]+self.checkDownVelocityPositions(matrix,stopingElement)))
 
