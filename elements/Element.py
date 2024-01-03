@@ -3,14 +3,17 @@ class Element:
     def __init__(self,x:int,y:int) -> None:
         self.position = [x,y]
         self.colour = (100,100,100)
+        self.health = 100
         self.velocity = (0,0)
         self.terminal_velocity = 10
         self.friction = 0.001
         self.friction_count = 0
         self.temp = 1
+        self.isIgnited = False
         self.isfreefalling = True
         self.movedthisframe = False
         self.movedlastframe = True
+
 
         self.viscosity = 1.0
     def step(self,matrix):
@@ -96,8 +99,20 @@ class Element:
         e4.temp = avg_temp
         self.temp = avg_temp
 
-    def RandomColour(self,colour):
-        rand = (random.random()-0.5)*30
+    def reciveHeat(self,heat):
+        return None
+
+    def spreadHeat(self,matrix):
+        pass
+
+    def lifeStep(self,matrix):
+        return None
+
+    def Ignited(self):
+        self.colour = (200,100,100)
+
+    def RandomColour(self,colour,ColourVariation = 30):
+        rand = (random.random()-0.5)*ColourVariation
         R = min(max(colour[0] + (rand),0),255)
         G = min(max(colour[1] + (rand),0),255)
         B = min(max(colour[2] + (rand),0),255)

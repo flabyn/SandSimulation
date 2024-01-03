@@ -4,7 +4,8 @@ class ElementType(Enum):
     EMPTYCELL = 0
     SAND = 1
     STONE = 2
-    WATER = 3
-    STEAM = 4
-
+    COAL = 3
+    WATER = 4
+    STEAM = 5
+    SMOKE = 6
             

@@ -10,13 +10,10 @@ class Gas(Element):
     
     def step(self,matrix):
 
-
         if self.viscosity < random.random():
             return
-        if self.life == 0:
-            matrix.DieAndReplace(self.position,ElementType.WATER)
-        else:
-            self.life -= 1
+
+        self.lifeStep(matrix)
 
         if self.position[1] == 0:
             return

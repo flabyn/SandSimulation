@@ -1,5 +1,4 @@
 from elements.Solid.moveableSolid.moveableSolid import MoveableSolid
-import random
 
 class Sand(MoveableSolid):
     def __init__(self, x,y) -> None:
