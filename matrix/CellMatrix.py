@@ -71,3 +71,29 @@ class CellMatrix:
     def DieAndReplace(self,pos,new_element):
         element = ElementType(new_element.value).MatrixCreateElement(pos[0],pos[1])
         self.SetElementAtIndex(pos[0],pos[1],element)
+    
+    def CellDie(self,pos):
+        self.SetElementAtIndex(pos[0],pos[1],ElementType.EMPTYCELL.MatrixCreateElement())
+
+    def Surrounded(self,pos) -> bool:
+        if pos[1] == 0 or pos[1] >= self.Matrixsize[1]-1:
+            return True
+        if pos[0] == 0 or pos[0] >= self.Matrixsize[0]-1:
+            return True
+        for y in range(-1,2,1):
+            for x in range(-1,2,1):
+                if isinstance(self.GetElementAtIndex(x+pos[0],y+pos[1]),EmptyCell):
+                    return False
+        return True
+    
+    def getSurroundingElements(self,pos,element = EmptyCell) -> list:
+        if pos[1] == 0 or pos[1] >= self.Matrixsize[1]-1:
+            return True
+        if pos[0] == 0 or pos[0] >= self.Matrixsize[0]-1:
+            return True
+        elements = []
+        for y in range(-1,2,1):
+            for x in range(-1,2,1):
+                if isinstance(self.GetElementAtIndex(x+pos[0],y+pos[1]),element):
+                    elements.append((x,y))
+        return elements

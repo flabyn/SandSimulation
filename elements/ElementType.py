@@ -9,16 +9,18 @@ from elements.Gas.Steam import Steam
 from elements.Gas.Smoke import Smoke
 from elements.Solid.moveableSolid.Coal import Coal
 from elements.Gas.Fire import Fire
+from elements.Solid.ImmovableSolid.Wood import Wood
 
 class ElementType(Enum):
     EMPTYCELL = 0
     SAND = 1
     STONE = 2
-    COAL = 3
-    WATER = 4
-    STEAM = 5
-    SMOKE = 6
-    FIRE = 7
+    WOOD = 3
+    COAL = 4
+    WATER = 5
+    STEAM = 6
+    SMOKE = 7
+    FIRE = 8
 
     def MatrixCreateElement(self,x:int=1,y:int=1) -> Element:
         match self:
@@ -30,6 +32,9 @@ class ElementType(Enum):
                 return cell 
             case ElementType.STONE:
                 cell = Stone(x,y)
+                return cell
+            case ElementType.WOOD:
+                cell = Wood(x,y)
                 return cell
             case ElementType.COAL:
                 cell = Coal(x,y)

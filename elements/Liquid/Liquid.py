@@ -10,9 +10,6 @@ class Liquid(Element):
         self.dispersialrate = 1+1
     
     def step(self,matrix):
-        if self.temp >= 100:
-            matrix.DieAndReplace(self.position,ElementType.STEAM)
-
         if self.position[1] == matrix.Matrixsize[1]-1:
             return
 
