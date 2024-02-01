@@ -7,7 +7,7 @@ class Wood(ImmovableSolid):
         self.colour = self.RandomColour((74, 48, 15))
         self.origanlColour = self.colour
         self.flameresistance = 0.4
-        self.burnrate = 4
+        self.burnrate = 10
     
     def step(self, matrix):
         if self.isIgnited and random.random() < 0.3:
